@@ -4,6 +4,8 @@
 **/nbproject/
 *.dylib
 *.iml
+*.ipr
+*.iws
 *.pyc
 *.so
 *.swo

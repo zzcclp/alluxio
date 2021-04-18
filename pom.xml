@@ -778,12 +778,24 @@
         <artifactId>powermock-module-junit4</artifactId>
         <version>${powermock.version}</version>
         <scope>test</scope>
+        <exclusions>
+          <exclusion>
+            <artifactId>hamcrest-core</artifactId>
+            <groupId>org.hamcrest</groupId>
+          </exclusion>
+        </exclusions>
       </dependency>
       <dependency>
         <groupId>org.powermock</groupId>
         <artifactId>powermock-module-junit4-rule</artifactId>
         <version>${powermock.version}</version>
         <scope>test</scope>
+        <exclusions>
+          <exclusion>
+            <artifactId>hamcrest-core</artifactId>
+            <groupId>org.hamcrest</groupId>
+          </exclusion>
+        </exclusions>
       </dependency>
       <dependency>
         <groupId>org.powermock</groupId>
