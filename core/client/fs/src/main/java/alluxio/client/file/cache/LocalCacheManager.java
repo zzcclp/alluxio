@@ -566,7 +566,10 @@ public class LocalCacheManager implements CacheManager {
   private int getPage(PageId pageId, int pageOffset, int bytesToRead, byte[] buffer,
       int bufferOffset) {
     try {
+      long start = System.currentTimeMillis();
       int ret = mPageStore.get(pageId, pageOffset, bytesToRead, buffer, bufferOffset);
+      LOG.error("====== get page {} {} {} {} {}", pageId, pageOffset,
+              bytesToRead, bufferOffset, (System.currentTimeMillis() - start));
       if (ret != bytesToRead) {
         // data read from page store is inconsistent from the metastore
         LOG.error("Failed to read page {}: supposed to read {} bytes, {} bytes actually read",
