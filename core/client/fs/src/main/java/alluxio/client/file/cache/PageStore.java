@@ -11,6 +11,7 @@
 
 package alluxio.client.file.cache;
 
+import alluxio.client.file.cache.store.ByteBufferPageStore;
 import alluxio.client.file.cache.store.LocalPageStore;
 import alluxio.client.file.cache.store.PageStoreOptions;
 import alluxio.client.file.cache.store.PageStoreType;
@@ -66,6 +67,9 @@ public interface PageStore extends AutoCloseable {
         break;
       case ROCKS:
         pageStore = RocksPageStore.open(options.toOptions());
+        break;
+      case BUFF:
+        pageStore = new ByteBufferPageStore(options.toOptions());
         break;
       default:
         throw new IllegalArgumentException(
