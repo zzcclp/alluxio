@@ -13,55 +13,61 @@ package alluxio.client.file.cache.store;
 
 import com.google.common.base.MoreObjects;
 
+/**
+ * Options used to instantiate the {@link ByteBufferPageStore}.
+ */
 public class ByteBufferPageStoreOptions extends PageStoreOptions {
-    // We assume there will be some overhead using ByteBuffer as a page store,
-    // i.e., with 1GB space allocated, we
-    // expect no more than 1024MB / (1 + BUFF_MEMORY_OVERHEAD_RATIO) logical data stored
-    private static final double BUFF_MEMORY_OVERHEAD_RATIO = 0.2;
+  // We assume there will be some overhead using ByteBuffer as a page store,
+  // i.e., with 1GB space allocated, we
+  // expect no more than 1024MB / (1 + BUFF_MEMORY_OVERHEAD_RATIO) logical data stored
+  private static final double BUFF_MEMORY_OVERHEAD_RATIO = 0.2;
 
-    /**
-     * The number of file buckets. It is recommended to set this to a high value if the number of
-     * unique files is expected to be high (# files / file buckets <= 100,000).
-     */
-    private int mFileBuckets;
+  /**
+   * The number of file buckets. It is recommended to set this to a high value if the number of
+   * unique files is expected to be high (# files / file buckets <= 100,000).
+   */
+  private int mFileBuckets;
 
-    public ByteBufferPageStoreOptions() {
-        mFileBuckets = 2000;
-        mOverheadRatio = ByteBufferPageStoreOptions.BUFF_MEMORY_OVERHEAD_RATIO;
-    }
+  /**
+   * Creates a new instance of {@link ByteBufferPageStoreOptions}.
+   */
+  public ByteBufferPageStoreOptions() {
+    mFileBuckets = 2000;
+    mOverheadRatio = ByteBufferPageStoreOptions.BUFF_MEMORY_OVERHEAD_RATIO;
+  }
 
-    @Override
-    public PageStoreType getType() {
-        return PageStoreType.BUFF;
-    }
+  @Override
+  public PageStoreType getType() {
+    return PageStoreType.BUFF;
+  }
 
-    /**
-     * @param fileBuckets the number of buckets to place files in
-     * @return the updated options
-     */
-    public ByteBufferPageStoreOptions setFileBuckets(int fileBuckets) {
-        mFileBuckets = fileBuckets;
-        return this;
-    }
+  /**
+   * @param fileBuckets the number of buckets to place files in
+   * @return the updated options
+   */
+  public ByteBufferPageStoreOptions setFileBuckets(int fileBuckets) {
+    mFileBuckets = fileBuckets;
+    return this;
+  }
 
-    /**
-     * @return the number of buckets to place files in
-     */
-    public int getFileBuckets() {
-        return mFileBuckets;
-    }
+  /**
+   * @return the number of buckets to place files in
+   */
+  public int getFileBuckets() {
+    return mFileBuckets;
+  }
 
-    @Override
-    public String toString() {
-        return MoreObjects.toStringHelper(this)
-                .add("AlluxioVersion", mAlluxioVersion)
-                .add("CacheSize", mCacheSize)
-                .add("FileBuckets", mFileBuckets)
-                .add("OverheadRatio", mOverheadRatio)
-                .add("PageSize", mPageSize)
-                .add("RootDir", mRootDir)
-                .add("TimeoutDuration", mTimeoutDuration)
-                .add("TimeoutThreads", mTimeoutThreads)
-                .toString();
-    }
+  @Override
+  public String toString() {
+    return MoreObjects.toStringHelper(this)
+        .add("AlluxioVersion", mAlluxioVersion)
+        .add("CacheSize", mCacheSize)
+        .add("FileBuckets", mFileBuckets)
+        .add("OverheadRatio", mOverheadRatio)
+        .add("PageSize", mPageSize)
+        .add("RootDir", mRootDir)
+        .add("TimeoutDuration", mTimeoutDuration)
+        .add("TimeoutThreads", mTimeoutThreads)
+        .toString();
+  }
 }
